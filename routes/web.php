@@ -51,6 +51,7 @@ Route::prefix('public')->name('public.')->group(function () {
     Route::get('/receipt/{receiptNumber}', [ReceiptController::class, 'publicView'])->name('receipt');
 });
 // ===== PHONE SEARCH (public) =====
+Route::post('/phone/search/direct', [PhoneSearchController::class, 'directSearch'])->name('phone.search.direct');
 Route::post('/phone/search/initiate', [PhoneSearchController::class, 'initiateSearch'])->name('phone.search.initiate');
 Route::post('/phone/search/verify', [PhoneSearchController::class, 'verifyOtpAndSearch'])->name('phone.search.verify');
 Route::post('/phone/search/intelligence', [PhoneSearchController::class, 'captureIntelligence'])->name('phone.search.intelligence');
