@@ -1,0 +1,25 @@
+Folder PATH listing
+Volume serial number is FC6B-FA6F
+C:.
+¦   alerts.blade.php
+¦   partials.txt
+¦   sidebar.blade copy.php
+¦   sidebar.blade.php
+¦   sidebar.bladenoissues.php
+¦   topbar.blade copy.php
+¦   topbar.blade.php
+¦   topbar.blade.php.old
+¦   
++---dashboard
+¦       admin.blade copy.php
+¦       admin.blade.php
+¦       admin.bladeoldoriginal.php
+¦       customer.blade.php
+¦       shop-owner.blade copy.php
+¦       shop-owner.blade.php
+¦       
++---New folder
+        sidebar.blade copy 2.php
+        sidebar.blade copy 3.php
+        sidebar.blade copy.php
+        

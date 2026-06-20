@@ -1,0 +1,211 @@
+Folder PATH listing
+Volume serial number is FC6B-FA6F
+C:.
+¦   dashboard.blade copy.php
+¦   dashboard.blade.php
+¦   home.blade.php
+¦   oldhomeupdated.blade.php
+¦   test-credentials.blade.php
+¦   views.txt
+¦   welcome.blade copy 2.php
+¦   welcome.blade copy 3.php
+¦   welcome.blade copy.php
+¦   welcome.blade.php
+¦   
++---admin
+¦   ¦   dashboard.blade copy.php
+¦   ¦   dashboard.blade.php
+¦   ¦   
+¦   +---logos
+¦   ¦       index.blade.php
+¦   ¦       
+¦   +---payments
+¦   ¦       index.blade copy.php
+¦   ¦       index.blade updated.php
+¦   ¦       index.blade.php
+¦   ¦       transaction-details.blade.php
+¦   ¦       
+¦   +---payouts
+¦   ¦       index.blade.php
+¦   ¦       
+¦   +---pre-approvals
+¦   ¦       create.blade.php
+¦   ¦       index.blade copy.php
+¦   ¦       index.blade.php
+¦   ¦       
+¦   +---receipts
+¦   ¦       details-modal.blade.php
+¦   ¦       index.blade.php
+¦   ¦       
+¦   +---reports
+¦   ¦   ¦   generate-form.blade.php
+¦   ¦   ¦   index.blade copy.php
+¦   ¦   ¦   index.blade.php
+¦   ¦   ¦   locations.blade.php
+¦   ¦   ¦   view.blade.php
+¦   ¦   ¦   
+¦   ¦   +---types
+¦   ¦           revenue-analysis.blade.php
+¦   ¦           
+¦   +---roles
+¦   ¦       create.blade.php
+¦   ¦       edit.blade.php
+¦   ¦       index.blade.php
+¦   ¦       show.blade.php
+¦   ¦       
+¦   +---settings
+¦   ¦       index.blade.php
+¦   ¦       
+¦   +---shops
+¦   ¦       details-modal.blade.php
+¦   ¦       index.blade copy.php
+¦   ¦       index.blade.php
+¦   ¦       show.blade.php
+¦   ¦       
+¦   +---system
+¦   ¦       health.blade.php
+¦   ¦       
+¦   +---unions
+¦   ¦       create.blade.php
+¦   ¦       edit.blade.php
+¦   ¦       index.blade.php
+¦   ¦       show.blade.php
+¦   ¦       
+¦   +---users
+¦           contact.blade.php
+¦           details-modal.blade.php
+¦           details.blade.php
+¦           edit.blade.php
+¦           index.blade copy.php
+¦           index.blade.php
+¦           
++---auth
+¦   ¦   forgot-password.blade.php
+¦   ¦   login.blade.php
+¦   ¦   register.blade.php
+¦   ¦   register.bladeold.php
+¦   ¦   reset-password.blade.php
+¦   ¦   verify.blade.php
+¦   ¦   
+¦   +---passwords
+¦           confirm.blade.php
+¦           email.blade.php
+¦           reset.blade.php
+¦           
++---components
++---emails
+¦       layout.blade.php
+¦       receipt.blade.php
+¦       resale-code-reminder.blade.php
+¦       resale-search-notification.blade.php
+¦       shop-approval.blade.php
+¦       welcome-user.blade.php
+¦       
++---help
+¦       index.blade.php
+¦       
++---layouts
+¦       admin.blade.php
+¦       app.blade copy.php
+¦       app.blade.php
+¦       guest.blade.php
+¦       union.blade copy.php
+¦       union.blade.php
+¦       
++---partials
+¦   ¦   alerts.blade.php
+¦   ¦   sidebar.blade copy.php
+¦   ¦   sidebar.blade.php
+¦   ¦   topbar.blade copy.php
+¦   ¦   topbar.blade.php
+¦   ¦   topbar.blade.php.old
+¦   ¦   
+¦   +---dashboard
+¦           admin.blade copy.php
+¦           admin.blade.php
+¦           admin.bladeoldoriginal.php
+¦           customer.blade.php
+¦           shop-owner.blade copy.php
+¦           shop-owner.blade.php
+¦           
++---payment
+¦       failed.blade.php
+¦       index.blade copy.php
+¦       index.blade.php
+¦       show.blade.php
+¦       success.blade.php
+¦       
++---performance
+¦       index.blade.php
+¦       
++---profile
+¦       edit.blade copy.php
+¦       edit.blade.php
+¦       show.blade.php
+¦       
++---public
+¦       verify-result.blade.php
+¦       
++---receipt
+¦       create.blade copy.php
+¦       create.blade.php
+¦       index.blade.php
+¦       pdf.blade copy 2.php
+¦       pdf.blade copy 3.php
+¦       pdf.blade copy.php
+¦       pdf.blade.php
+¦       print.blade copy.php
+¦       print.blade.php
+¦       resale.blade copy.php
+¦       resale.blade.php
+¦       show.blade.php
+¦       view.blade copy 2.php
+¦       view.blade copy.php
+¦       view.blade.php
+¦       
++---search
+¦       advanced-results.blade.php
+¦       advanced.blade.php
+¦       index.blade copy.php
+¦       index.blade.php
+¦       public-verify.blade.php
+¦       verify-result.blade.php
+¦       
++---shop
+¦   ¦   create.blade copy.php
+¦   ¦   create.blade.php
+¦   ¦   edit.blade copy.php
+¦   ¦   edit.blade.php
+¦   ¦   register.blade.php
+¦   ¦   show.blade copy.php
+¦   ¦   show.blade.php
+¦   ¦   
+¦   +---payments
+¦   ¦       index.blade copy.php
+¦   ¦       index.blade.php
+¦   ¦       index.bladegood.php
+¦   ¦       
+¦   +---payouts
+¦           create.blade.php
+¦           index.blade copy.php
+¦           index.blade.php
+¦           show.blade.php
+¦           
++---shops
+¦       dashboard.blade.php
+¦       
++---union
+    ¦   dashboard.blade copy 2.php
+    ¦   dashboard.blade copy.php
+    ¦   dashboard.blade.php
+    ¦   
+    +---pre-approvals
+    ¦       create.blade.php
+    ¦       index.blade.php
+    ¦       
+    +---shop-owners
+            index.blade copy.php
+            index.blade.php
+            show.blade.php
+            statistics.blade.php
+            
