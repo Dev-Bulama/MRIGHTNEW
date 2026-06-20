@@ -163,10 +163,11 @@
         .faq-icon{transition:transform 0.2s;color:var(--text-muted);font-size:0.8rem;}
 
         /* DEMO BOX */
-        .demo-box{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:14px;padding:1.1rem 1.4rem;margin-top:1rem;text-align:left;}
-        .demo-box-title{font-size:0.78rem;font-weight:700;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.6rem;}
-        .demo-pill{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);border-radius:50px;padding:0.3rem 0.8rem;font-size:0.8rem;margin:0.2rem;cursor:pointer;transition:all 0.2s;font-family:'Inter',monospace;}
-        .demo-pill:hover{background:rgba(255,255,255,0.22);color:white;}
+        .demo-box{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:14px;padding:1rem 1.25rem;margin-top:1rem;text-align:left;}
+        .demo-box-title{font-size:0.75rem;font-weight:700;color:rgba(255,255,255,0.65);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.55rem;}
+        .demo-pills-row{display:flex;flex-wrap:wrap;gap:0.35rem;}
+        .demo-pill{display:inline-flex;align-items:center;gap:0.35rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);border-radius:50px;padding:0.28rem 0.75rem;font-size:0.78rem;cursor:pointer;transition:all 0.2s;font-family:'Inter',monospace;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+        .demo-pill:hover,.demo-pill:active{background:rgba(255,255,255,0.22);color:white;}
         .demo-pill .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
         .dot-green{background:#27AE60;}
         .dot-red{background:#E74C3C;}
@@ -187,14 +188,83 @@
         .spin{animation:spin 0.8s linear infinite;display:inline-block;}
         @keyframes spin{to{transform:rotate(360deg);}}
 
-        @media(max-width:768px){
-            .hero-section{padding:6rem 1rem 3rem;}
-            .search-hero-box{border-radius:20px;flex-wrap:wrap;padding:0.75rem;}
-            .search-hero-input{font-size:0.95rem;}
-            .search-hero-btn{width:100%;justify-content:center;}
-            .result-grid{grid-template-columns:1fr;}
-            .hero-stats-row{gap:1.25rem;}
-            .demo-pill{font-size:0.75rem;}
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media(max-width:991px){
+            .navbar-custom{ padding:0.7rem 0; }
+            .navbar-brand-text{ font-size:1rem; }
+            /* Hide "Receipt Portal" text, show icon-only on small screens */
+        }
+
+        @media(max-width:575px){
+            /* Navbar — keep it tight */
+            .navbar-brand-sub{ display:none; }
+            .nav-link-custom.portal-link{ font-size:0.8rem; padding:0.4rem 0.6rem!important; }
+            .btn-nav-primary{ padding:0.4rem 0.9rem!important; font-size:0.8rem; }
+
+            /* Hero */
+            .hero-section{ padding:5.5rem 0.75rem 2.5rem; }
+            .hero-badge{ font-size:0.72rem; padding:0.32rem 0.9rem; }
+            .hero-title{ font-size:1.85rem; margin-bottom:0.75rem; }
+            .hero-subtitle{ font-size:0.88rem; margin-bottom:2rem; }
+
+            /* Search box — stacked on small screens */
+            .search-hero-box{
+                border-radius:18px;
+                flex-direction:column;
+                align-items:stretch;
+                padding:0.75rem;
+                gap:0.6rem;
+            }
+            .search-hero-icon{ display:none; } /* hide magnifier when stacked */
+            .search-hero-input{
+                font-size:0.95rem;
+                padding:0.6rem 0.75rem;
+                border-bottom:1px solid #E8ECEF;
+                border-radius:10px;
+                background:#F8FAFC;
+            }
+            .search-hero-btn{
+                border-radius:12px;
+                width:100%;
+                justify-content:center;
+                padding:0.8rem 1rem;
+                font-size:0.9rem;
+            }
+
+            /* Demo pills — wrap nicely */
+            .demo-box{ padding:0.85rem 1rem; }
+            .demo-box-title{ font-size:0.72rem; }
+            .demo-pill{ font-size:0.73rem; padding:0.25rem 0.65rem; }
+
+            /* Results */
+            .result-grid{ grid-template-columns:1fr; }
+            .result-card{ padding:1.25rem; border-radius:16px; }
+            .result-title{ font-size:1.1rem; }
+            .result-badge{ font-size:0.75rem; }
+
+            /* Hero stats */
+            .hero-stats-row{ gap:1rem; margin-top:2rem; }
+            .hero-stat-num{ font-size:1.3rem; }
+            .hero-stat-label{ font-size:0.65rem; }
+
+            /* Sections */
+            .section{ padding:3rem 0; }
+            .section-title{ font-size:1.5rem; }
+            .how-step-num{ width:48px; height:48px; font-size:1rem; }
+
+            /* Stats banner */
+            .stat-num{ font-size:2rem; }
+
+            /* Dark CTA */
+            .dark-cta{ padding:3rem 0; }
+        }
+
+        @media(min-width:576px) and (max-width:767px){
+            /* Tablet-ish: keep box horizontal but make button smaller */
+            .search-hero-box{ border-radius:50px; }
+            .search-hero-btn{ padding:0.65rem 1.2rem; font-size:0.85rem; }
+            .hero-title{ font-size:2.4rem; }
+            .result-grid{ grid-template-columns:1fr 1fr; }
         }
     </style>
 </head>
@@ -203,17 +273,30 @@
 <!-- NAVBAR -->
 <nav class="navbar-custom">
     <div class="container">
-        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
-            <a href="{{ route('home') }}" class="text-decoration-none">
+        <div class="d-flex align-items-center justify-content-between">
+            <!-- Brand -->
+            <a href="{{ route('home') }}" class="text-decoration-none" style="flex-shrink:0;">
                 <div class="navbar-brand-text">M-Right Anti-Theft</div>
                 <span class="navbar-brand-sub">Phone Anti-Theft & Ownership Verification</span>
             </a>
-            <div class="d-flex align-items-center gap-1 flex-wrap">
-                <a href="#features" class="nav-link-custom d-none d-md-block">Features</a>
-                <a href="#how-it-works" class="nav-link-custom d-none d-md-block">How It Works</a>
-                <a href="#faq" class="nav-link-custom d-none d-md-block">FAQ</a>
+
+            <!-- Desktop nav -->
+            <div class="d-none d-md-flex align-items-center gap-1">
+                <a href="#features" class="nav-link-custom">Features</a>
+                <a href="#how-it-works" class="nav-link-custom">How It Works</a>
+                <a href="#faq" class="nav-link-custom">FAQ</a>
                 <a href="{{ route('receipt.portal.login') }}" class="nav-link-custom">Receipt Portal</a>
-                <a href="{{ route('login') }}" class="nav-link-custom btn-nav-primary">Shop Login</a>
+                <a href="{{ route('login') }}" class="nav-link-custom btn-nav-primary ms-1">Shop Login</a>
+            </div>
+
+            <!-- Mobile nav — only 2 key buttons -->
+            <div class="d-flex d-md-none align-items-center gap-2">
+                <a href="{{ route('receipt.portal.login') }}" class="nav-link-custom portal-link" style="font-size:0.8rem;padding:0.4rem 0.65rem!important;">
+                    <i class="fas fa-shield-halved me-1"></i>Portal
+                </a>
+                <a href="{{ route('login') }}" class="nav-link-custom btn-nav-primary" style="font-size:0.8rem;padding:0.4rem 0.9rem!important;">
+                    Login
+                </a>
             </div>
         </div>
     </div>
@@ -262,19 +345,21 @@
 
             <!-- Demo Quick-Fill Pills -->
             <div class="demo-box">
-                <div class="demo-box-title">Try a demo serial number:</div>
-                <span class="demo-pill" onclick="fillSearch('DEMO-IPHONE13-001')">
-                    <span class="dot dot-green"></span> DEMO-IPHONE13-001
-                </span>
-                <span class="demo-pill" onclick="fillSearch('DEMO-SAMSUNG-002')">
-                    <span class="dot dot-red"></span> DEMO-SAMSUNG-002
-                </span>
-                <span class="demo-pill" onclick="fillSearch('DEMO-TECNO-003')">
-                    <span class="dot dot-green"></span> DEMO-TECNO-003
-                </span>
-                <span class="demo-pill" onclick="fillSearch('UNKNOWN-RANDOM-999')">
-                    <span class="dot dot-blue"></span> UNKNOWN-RANDOM-999
-                </span>
+                <div class="demo-box-title">Try a demo — tap any serial below:</div>
+                <div class="demo-pills-row">
+                    <span class="demo-pill" onclick="fillSearch('DEMO-IPHONE13-001')">
+                        <span class="dot dot-green"></span>DEMO-IPHONE13-001
+                    </span>
+                    <span class="demo-pill" onclick="fillSearch('DEMO-SAMSUNG-002')">
+                        <span class="dot dot-red"></span>DEMO-SAMSUNG-002
+                    </span>
+                    <span class="demo-pill" onclick="fillSearch('DEMO-TECNO-003')">
+                        <span class="dot dot-green"></span>DEMO-TECNO-003
+                    </span>
+                    <span class="demo-pill" onclick="fillSearch('UNKNOWN-RANDOM-999')">
+                        <span class="dot dot-blue"></span>UNKNOWN-RANDOM-999
+                    </span>
+                </div>
             </div>
 
             <!-- RESULT AREA -->
