@@ -5,7 +5,7 @@
 @section('content')
 <h2>Welcome, {{ $user->first_name }}! 🎉</h2>
 
-<p>Thank you for registering with M-right Digital Receipt System. Your account has been successfully created!</p>
+<p>Thank you for registering with Phone Anti-Theft Digital Receipt System. Your account has been successfully created!</p>
 
 <div class="alert alert-success">
     <strong>Account Details:</strong><br>

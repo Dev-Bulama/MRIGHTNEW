@@ -20,7 +20,7 @@ class WelcomeNewUser extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome to M-right Digital Receipt System',
+            subject: 'Welcome to Phone Anti-Theft Digital Receipt System',
         );
     }
 

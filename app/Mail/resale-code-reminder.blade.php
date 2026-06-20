@@ -208,7 +208,7 @@
         <div class="header">
             <div class="icon">🔐</div>
             <h1>Resale Code Reminder</h1>
-            <p style="margin: 0; opacity: 0.9;">M-right Digital Receipt System</p>
+            <p style="margin: 0; opacity: 0.9;">Phone Anti-Theft Digital Receipt System</p>
         </div>
         
         <!-- Content -->
@@ -289,7 +289,7 @@
         
         <!-- Footer -->
         <div class="footer">
-            <div class="logo">M-right Digital Receipt System</div>
+            <div class="logo">Phone Anti-Theft Digital Receipt System</div>
             <p>
                 This email was sent to {{ $customer_name }} at the request of a verified dealer.<br>
                 For security questions, contact support immediately.

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>@yield('title', 'M-right Digital Receipt') | {{ config('app.name', 'M-right Portal') }}</title>
+    <title>@yield('title', 'Phone Anti-Theft Digital Receipt') | {{ config('app.name', 'M-right Portal') }}</title>
     <meta name="description" content="@yield('description', 'Digital receipt generation system for phone shops')">
     
     <!-- Fonts -->

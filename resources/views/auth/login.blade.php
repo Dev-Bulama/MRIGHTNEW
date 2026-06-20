@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Login')
-@section('description', 'Sign in to your M-right Digital Receipt account')
+@section('description', 'Sign in to your Phone Anti-Theft Digital Receipt account')
 
 @section('content')
 <!-- Session Expiration Message -->
@@ -44,7 +44,7 @@
         
         @if($mrightLogo)
             <img src="{{ $mrightLogo->logo_url }}" 
-                 alt="M-right Digital Receipt" 
+                 alt="Phone Anti-Theft Digital Receipt" 
                  style="max-width: 90px; max-height: 70px; object-fit: contain;">
         @else
             <div class="bg-gradient-primary rounded-3 d-flex align-items-center justify-content-center text-white"
@@ -63,7 +63,7 @@
     @endif -->
     
     <h2 class="fw-bold text-dark mb-1">Welcome Back</h2>
-    <p class="text-muted mb-0">Sign in to your M-right Digital Receipt account</p>
+    <p class="text-muted mb-0">Sign in to your Phone Anti-Theft Digital Receipt account</p>
 </div>
                         </div>
                         

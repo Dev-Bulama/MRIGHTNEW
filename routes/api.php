@@ -39,7 +39,7 @@ Route::get('/antitheft', function () {
             'name' => 'M-Right Digital AntiTheft Integration API',
             'version' => '1.0.0',
             'status' => 'operational',
-            'description' => 'API for communication between AntiTheft systems and M-Right Digital Receipt platform',
+            'description' => 'API for communication between AntiTheft systems and Phone Anti-Theft Digital Receipt platform',
             'last_updated' => '2025-01-20',
         ],
         'authentication' => [

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'M-right Digital Receipt')</title>
+    <title>@yield('title', 'Phone Anti-Theft Digital Receipt')</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -77,7 +77,7 @@
 <body>
     <div class="email-container">
         <div class="email-header">
-            <h1>📧 M-right Digital Receipt</h1>
+            <h1>📧 Phone Anti-Theft Digital Receipt</h1>
             <p>Professional Digital Receipt System</p>
         </div>
         
@@ -86,7 +86,7 @@
         </div>
         
         <div class="email-footer">
-            <p><strong>M-right Digital Receipt System</strong></p>
+            <p><strong>Phone Anti-Theft Digital Receipt System</strong></p>
             <p>
                 <a href="{{ config('app.url') }}">Visit Website</a> | 
                 <a href="mailto:info@skillychat.com.ng">Contact Support</a>

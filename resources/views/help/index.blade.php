@@ -2,7 +2,7 @@
 
 @section('title', 'Help & Support')
 @section('page-title', 'Help & Support')
-@section('page-description', 'Get help with using the M-right Digital Receipt System')
+@section('page-description', 'Get help with using the Phone Anti-Theft Digital Receipt System')
 
 @push('styles')
 <style>
@@ -103,7 +103,7 @@
                 <h5 class="card-title mb-0">
                     <i class="fas fa-question-circle me-2"></i>Help & Support Center
                 </h5>
-                <small class="opacity-75">Get assistance with M-right Digital Receipt System</small>
+                <small class="opacity-75">Get assistance with Phone Anti-Theft Digital Receipt System</small>
             </div>
             <div class="card-body">
                 
@@ -143,7 +143,7 @@
                     <h6 class="section-title">
                         <i class="fas fa-question-circle me-2"></i>Frequently Asked Questions
                     </h6>
-                    <p class="text-muted mb-4">Find answers to common questions about M-right Digital Receipt System</p>
+                    <p class="text-muted mb-4">Find answers to common questions about Phone Anti-Theft Digital Receipt System</p>
                     
                     <div class="accordion" id="faqAccordion">
                         
@@ -203,7 +203,7 @@
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
                                     <i class="fas fa-user-shield me-2 text-info"></i>
-                                    What are the benefits of M-right Digital Receipt to Customers?
+                                    What are the benefits of Phone Anti-Theft Digital Receipt to Customers?
                                 </button>
                             </h2>
                             <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
@@ -224,7 +224,7 @@
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
                                     <i class="fas fa-store me-2 text-primary"></i>
-                                    What are the benefits of M-right Digital Receipt to Shop Owners?
+                                    What are the benefits of Phone Anti-Theft Digital Receipt to Shop Owners?
                                 </button>
                             </h2>
                             <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">

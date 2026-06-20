@@ -241,7 +241,7 @@
     <div class="receipt-container">
         <!-- Receipt Header -->
         <div class="receipt-header">
-            <h1>📧 M-right Digital Receipt</h1>
+            <h1>📧 Phone Anti-Theft Digital Receipt</h1>
             <p class="mb-0">PHONE E-RECEIPT ACCESSIBLE ONLINE</p>
             <div class="receipt-number">{{ $receipt->receipt_number }}</div>
             <div class="mt-3">

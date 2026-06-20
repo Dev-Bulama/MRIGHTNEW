@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PhoneSearchController;
+use App\Http\Controllers\ReceiptPortalController;
+use App\Http\Controllers\Admin\SystemSettingsController;
 use App\Services\NigeriaData;
 
 
@@ -47,6 +50,23 @@ Route::prefix('public')->name('public.')->group(function () {
     Route::post('/search', [SearchController::class, 'publicSearch'])->name('search');
     Route::get('/receipt/{receiptNumber}', [ReceiptController::class, 'publicView'])->name('receipt');
 });
+// ===== PHONE SEARCH (public) =====
+Route::post('/phone/search/initiate', [PhoneSearchController::class, 'initiateSearch'])->name('phone.search.initiate');
+Route::post('/phone/search/verify', [PhoneSearchController::class, 'verifyOtpAndSearch'])->name('phone.search.verify');
+Route::post('/phone/search/intelligence', [PhoneSearchController::class, 'captureIntelligence'])->name('phone.search.intelligence');
+Route::post('/phone/search/capture', [PhoneSearchController::class, 'storeCapture'])->name('phone.search.capture');
+
+// ===== RECEIPT PORTAL (session-based, no auth) =====
+Route::prefix('receipt-portal')->name('receipt.portal.')->group(function () {
+    Route::get('/login', [ReceiptPortalController::class, 'showLogin'])->name('login');
+    Route::post('/login', [ReceiptPortalController::class, 'login'])->name('login.post');
+    Route::get('/dashboard', [ReceiptPortalController::class, 'dashboard'])->name('dashboard');
+    Route::post('/declare-missing', [ReceiptPortalController::class, 'declareMissing'])->name('declare-missing');
+    Route::post('/reverse-missing', [ReceiptPortalController::class, 'reverseMissing'])->name('reverse-missing');
+    Route::get('/download-pdf', [ReceiptPortalController::class, 'downloadPdf'])->name('download-pdf');
+    Route::post('/logout', [ReceiptPortalController::class, 'logout'])->name('logout');
+});
+
 // Authentication Routes
 Route::middleware('guest')->group(function () {
     // Registration Routes
@@ -290,6 +310,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/', [AdminController::class, 'dashboard']);
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard/export', [AdminController::class, 'export'])->name('dashboard.export');
+
+    // System Settings
+    Route::prefix('system-settings')->name('system-settings.')->group(function () {
+        Route::get('/', [SystemSettingsController::class, 'index'])->name('index');
+        Route::post('/', [SystemSettingsController::class, 'update'])->name('update');
+        Route::post('/downloads', [SystemSettingsController::class, 'storeDownload'])->name('downloads.store');
+        Route::delete('/downloads/{download}', [SystemSettingsController::class, 'destroyDownload'])->name('downloads.destroy');
+    });
 
     // Shop Management - Use the proper controller methods
     Route::prefix('shops')->name('shops.')->group(function () {

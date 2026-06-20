@@ -82,7 +82,7 @@ return view('dashboard', $data);}
     //         return [
     //             [
     //                 'title' => 'Account Created',
-    //                 'description' => 'Welcome to M-right Digital Receipt System',
+    //                 'description' => 'Welcome to Phone Anti-Theft Digital Receipt System',
     //                 'time' => $user->created_at->diffForHumans(),
     //                 'icon' => 'fa-user-plus',
     //                 'color' => 'success',
@@ -103,7 +103,7 @@ return view('dashboard', $data);}
     //         return [
     //             [
     //                 'title' => 'Account Created',
-    //                 'description' => 'Welcome to M-right Digital Receipt System',
+    //                 'description' => 'Welcome to Phone Anti-Theft Digital Receipt System',
     //                 'time' => $user->created_at->diffForHumans(),
     //                 'icon' => 'fa-user-plus',
     //                 'color' => 'success'

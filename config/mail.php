@@ -18,6 +18,6 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'info@skillychat.com.ng'),
-        'name' => env('MAIL_FROM_NAME', 'M-right Digital Receipt System'),
+        'name' => env('MAIL_FROM_NAME', 'Phone Anti-Theft Digital Receipt System'),
     ],
 ];
