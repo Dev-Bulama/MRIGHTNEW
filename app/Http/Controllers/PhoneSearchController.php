@@ -15,6 +15,126 @@ use Illuminate\Support\Facades\Storage;
 
 class PhoneSearchController extends Controller
 {
+    /**
+     * Direct search — no OTP required. Instant result by serial number.
+     * This is the primary public search endpoint used on the homepage.
+     */
+    public function directSearch(Request $request)
+    {
+        $validated = $request->validate([
+            'serial_number' => ['required', 'string', 'min:4', 'max:30'],
+        ]);
+
+        $key = 'direct_search_' . $request->ip();
+        if (RateLimiter::tooManyAttempts($key, 20)) {
+            $seconds = RateLimiter::availableIn($key);
+            return response()->json([
+                'success' => false,
+                'case' => 3,
+                'message' => "Too many searches. Try again in {$seconds} seconds.",
+                'reward_phone' => SystemSetting::get('reward_phone', '08013131313'),
+            ], 429);
+        }
+        RateLimiter::hit($key, 60);
+
+        $serialNumber = strtoupper(trim($validated['serial_number']));
+        $rewardPhone  = SystemSetting::get('reward_phone', '08013131313');
+
+        try {
+            // 1. Check Receipt table
+            $receipt = Receipt::where('phone_serial_number', $serialNumber)
+                ->with(['shop'])
+                ->latest()
+                ->first();
+
+            // 2. Check AntiTheftPhone table
+            $antiTheft = AntiTheftPhone::where('serial_number', $serialNumber)->first();
+
+            // Determine result case
+            $isMissing = ($receipt && $receipt->is_missing)
+                || ($antiTheft && $antiTheft->status === AntiTheftPhone::STATUS_REPORTED_STOLEN);
+
+            if ($isMissing) {
+                // Case 2 — found but missing
+                $ownerName  = $receipt ? $receipt->customer_name  : ($antiTheft->current_owner_name  ?? '—');
+                $ownerPhone = $receipt ? $receipt->customer_phone : ($antiTheft->current_owner_phone ?? '—');
+                $phoneName  = $receipt ? $receipt->phone_name     : (($antiTheft->phone_brand ?? '') . ' ' . ($antiTheft->phone_model ?? ''));
+                $dateRep    = $receipt && $receipt->missing_reported_at
+                    ? $receipt->missing_reported_at->format('M d, Y')
+                    : ($receipt ? $receipt->updated_at->format('M d, Y') : now()->format('M d, Y'));
+
+                // Notify admin
+                $this->notifyAdminMissingPhoneSearch($serialNumber, $request);
+
+                // Store intelligence (best-effort)
+                $this->storeBasicIntelligence($serialNumber, 'found_missing', $request);
+
+                return response()->json([
+                    'success'       => true,
+                    'case'          => 2,
+                    'phone_model'   => trim($phoneName) ?: 'Unknown Device',
+                    'owner_name'    => $ownerName,
+                    'owner_phone'   => $ownerPhone,
+                    'date_reported' => $dateRep,
+                    'serial_number' => $serialNumber,
+                    'reward_phone'  => $rewardPhone,
+                ]);
+
+            } elseif ($receipt) {
+                // Case 1 — found, not missing
+                $this->storeBasicIntelligence($serialNumber, 'found_not_missing', $request);
+
+                return response()->json([
+                    'success'         => true,
+                    'case'            => 1,
+                    'phone_model'     => $receipt->phone_name,
+                    'phone_color'     => $receipt->phone_color ?? '',
+                    'owner_name'      => $receipt->customer_name,
+                    'owner_phone'     => $receipt->customer_phone,
+                    'date_registered' => $receipt->created_at->format('M d, Y'),
+                    'serial_number'   => $serialNumber,
+                    'reward_phone'    => $rewardPhone,
+                ]);
+
+            } else {
+                // Case 3 — not found
+                $this->storeBasicIntelligence($serialNumber, 'not_found', $request);
+
+                return response()->json([
+                    'success'      => true,
+                    'case'         => 3,
+                    'serial_number'=> $serialNumber,
+                    'reward_phone' => $rewardPhone,
+                ]);
+            }
+
+        } catch (\Exception $e) {
+            Log::error('DirectSearch error: ' . $e->getMessage(), ['serial' => $serialNumber, 'ip' => $request->ip()]);
+            return response()->json([
+                'success' => false,
+                'case'    => 3,
+                'message' => 'Search service temporarily unavailable. Please try again.',
+                'reward_phone' => $rewardPhone,
+            ], 500);
+        }
+    }
+
+    private function storeBasicIntelligence(string $serial, string $result, Request $request): void
+    {
+        try {
+            SearchIntelligence::create([
+                'serial_number' => $serial,
+                'search_result' => $result,
+                'ip_address'    => $request->ip(),
+                'user_agent'    => $request->userAgent(),
+                'referrer'      => $request->headers->get('referer'),
+                'session_id'    => session()->getId(),
+            ]);
+        } catch (\Exception $e) {
+            // Table may not exist yet — silent fail
+        }
+    }
+
     public function initiateSearch(Request $request)
     {
         $validated = $request->validate([
