@@ -32,7 +32,7 @@ class DemoPhoneSeeder extends Seeder
                 'status'                     => 'active',
                 'is_missing'                 => false,
                 'service_fee'                => 500,
-                'resale_code_confirmation'   => null,
+                'resale_code_confirmation'   => $data['resale_code'] ?? '',
                 'notes'                      => null,
             ], $data, [
                 // phone_serial_confirmation must match phone_serial_number
