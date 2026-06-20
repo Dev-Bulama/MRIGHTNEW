@@ -206,6 +206,35 @@ public function store(Request $request)
         'payment_method' => ['required', 'in:paystack,offline'],
     ]);
 
+    // DUPLICATE PROTECTION: Check if phone serial is already reported missing
+    if (!empty($validated['phone_serial_number'])) {
+        $missingReceipt = Receipt::where('phone_serial_number', $validated['phone_serial_number'])
+            ->where('is_missing', true)->first();
+        $missingAntiTheft = \App\Models\AntiTheftPhone::where('serial_number', $validated['phone_serial_number'])
+            ->where('status', \App\Models\AntiTheftPhone::STATUS_REPORTED_STOLEN)->first();
+
+        if ($missingReceipt || $missingAntiTheft) {
+            // Capture intelligence about this registration attempt
+            Log::warning('Attempt to generate receipt for missing phone', [
+                'serial' => $validated['phone_serial_number'],
+                'attempted_by' => $user->id,
+                'ip' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+            ]);
+            // Notify admin
+            try {
+                $adminEmail = config('mail.from.address');
+                Mail::raw(
+                    "⚠ ALERT: Attempt to generate receipt for MISSING phone!\n\nSerial: {$validated['phone_serial_number']}\nAttempted by: {$user->name} (ID: {$user->id})\nShop: {$user->shop->shop_name}\nIP: {$request->ip()}\nTime: " . now(),
+                    fn($m) => $m->to($adminEmail)->subject('🚨 Missing Phone Receipt Attempt - M-Right')
+                );
+            } catch (\Exception $e) { /* silent */ }
+
+            return back()->withInput()->with('error',
+                'This phone has already been reported missing. Registration has been declined. This attempt has been logged and the administrator has been notified.');
+        }
+    }
+
     try {
         DB::beginTransaction();
 
@@ -236,6 +265,7 @@ public function store(Request $request)
             'payment_status' => 'pending', // Always start as pending
             'resale_code' => $validated['resale_code'] ? strtoupper($validated['resale_code']) : null,
             'resale_code_confirmation' => $validated['resale_code'] ? strtoupper($validated['resale_code']) : null,
+            'resale_pin' => str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT),
             'enable_antitheft' => $validated['enable_antitheft'] ?? false,
             'receipt_type' => $validated['receipt_type'],
             'parent_receipt_id' => $validated['parent_receipt_id'] ?? null,

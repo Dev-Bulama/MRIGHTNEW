@@ -31,7 +31,7 @@
         @endif
     </div>
     <h2 class="fw-bold text-dark mb-2">Create Account</h2>
-    <p class="text-muted">Join M-right Digital Receipt System</p>
+    <p class="text-muted">Join Phone Anti-Theft Digital Receipt System</p>
 </div>
 
                         <!-- Registration Form -->
@@ -282,7 +282,7 @@
 <!--                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>-->
 <!--            </div>-->
 <!--            <div class="modal-body">-->
-<!--                <p>By creating an account with M-right Digital Receipt System, you agree to:</p>-->
+<!--                <p>By creating an account with Phone Anti-Theft Digital Receipt System, you agree to:</p>-->
 <!--                <p>Terms of service and privacy policy: -->
 
 <!-- Terms of Service: -->
@@ -343,7 +343,7 @@
       </div>
       
       <div class="modal-body">
-        <p class="mb-3">By creating an account with <strong>M-right Digital Receipt System</strong>, you agree to the following terms:</p>
+        <p class="mb-3">By creating an account with <strong>Phone Anti-Theft Digital Receipt System</strong>, you agree to the following terms:</p>
 
         <h6 class="fw-bold mt-3">📌 Terms of Service</h6>
         <p>

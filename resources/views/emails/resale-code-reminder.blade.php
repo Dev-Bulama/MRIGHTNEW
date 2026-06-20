@@ -72,7 +72,7 @@
     <div class="email-container">
         <div class="header">
             <h1>🔐 Resale Code Reminder</h1>
-            <p style="margin: 0; opacity: 0.9;">M-right Digital Receipt System</p>
+            <p style="margin: 0; opacity: 0.9;">Phone Anti-Theft Digital Receipt System</p>
         </div>
         
         <div class="content">
@@ -111,7 +111,7 @@
         </div>
         
         <div class="footer">
-            <p><strong>M-right Digital Receipt System</strong></p>
+            <p><strong>Phone Anti-Theft Digital Receipt System</strong></p>
             <p>This is an automated security email. Please do not reply.</p>
         </div>
     </div>

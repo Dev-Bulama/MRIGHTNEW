@@ -17,7 +17,7 @@
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h4 class="fw-bold mb-2">Welcome to M-right Digital Receipt System</h4>
+                        <h4 class="fw-bold mb-2">Welcome to Phone Anti-Theft Digital Receipt System</h4>
                         <p class="mb-3 opacity-75">
                             Manage your phone purchase receipts and track ownership records securely. 
                             Search for receipts using your phone's serial number or your contact information.

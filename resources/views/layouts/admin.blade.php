@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'M-Right Digital Receipt') }} - Admin Dashboard</title>
+    <title>{{ config('app.name', 'Phone Anti-Theft Digital Receipt') }} - Admin Dashboard</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -311,6 +311,13 @@
                 <a href="{{ route('admin.settings.index') }}" class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                     <i class="fas fa-cog"></i>
                     <span class="nav-text">Settings</span>
+                </a>
+            </div>
+
+            <div class="nav-item">
+                <a href="{{ route('admin.system-settings.index') }}" class="nav-link {{ request()->routeIs('admin.system-settings.*') ? 'active' : '' }}">
+                    <i class="fas fa-sliders"></i>
+                    <span class="nav-text">Platform Config</span>
                 </a>
             </div>
 

@@ -8,7 +8,7 @@
         <!-- Header -->
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">Register Your Phone Shop</h1>
-            <p class="text-gray-600">Join M-right Digital Receipt platform and start generating professional receipts for your customers</p>
+            <p class="text-gray-600">Join Phone Anti-Theft Digital Receipt platform and start generating professional receipts for your customers</p>
         </div>
 
         <!-- Registration Form -->
@@ -239,7 +239,7 @@
                             <label for="agree_terms" class="text-gray-700">
                                 I agree to the <a href="#" class="text-blue-600 hover:text-blue-500">Terms and Conditions</a> 
                                 and <a href="#" class="text-blue-600 hover:text-blue-500">Privacy Policy</a> 
-                                of M-right Digital Receipt platform. <span class="text-red-500">*</span>
+                                of Phone Anti-Theft Digital Receipt platform. <span class="text-red-500">*</span>
                             </label>
                         </div>
                     </div>

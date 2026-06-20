@@ -80,7 +80,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>📧 M-right Digital Receipt</h1>
+        <h1>📧 Phone Anti-Theft Digital Receipt</h1>
         <p>PHONE E-RECEIPT ACCESSIBLE ONLINE</p>
         <div class="receipt-number">{{ $receipt->receipt_number }}</div>
     </div>
@@ -88,8 +88,8 @@
     <div class="content">
         <h2>Hello {{ $receipt->customer_name }},</h2>
         <!--<p>Thank you for your {{ $receipt->receipt_type === 'resale' ? 'phone resale' : 'phone purchase' }}! Your digital receipt has been generated and is attached to this email.</p>-->
-        <!--<p>Thank you for using M-right Digital Receipt! Your digital receipt has been generated and is attached to this email.</p>-->
-        <p>Thank you for using M-right Digital Receipt! Your {{ $receipt->receipt_type === 'resale' ? 'phone resale' : 'phone purchase' }}! Your digital receipt has been generated and is attached to this email.</p>
+        <!--<p>Thank you for using Phone Anti-Theft Digital Receipt! Your digital receipt has been generated and is attached to this email.</p>-->
+        <p>Thank you for using Phone Anti-Theft Digital Receipt! Your {{ $receipt->receipt_type === 'resale' ? 'phone resale' : 'phone purchase' }}! Your digital receipt has been generated and is attached to this email.</p>
 
 
         @if($receipt->receipt_type === 'resale' && $receipt->parentReceipt)
@@ -159,7 +159,7 @@
 
     <div class="footer">
         <p><strong>Important:</strong> Keep this receipt safe and your resale code remembered. The resale code is used to add the phone to M-right phone antitheft (M-right com.ng) or to resale.</p>
-        <p>This is an automated email from M-right Digital Receipt System.</p>
+        <p>This is an automated email from Phone Anti-Theft Digital Receipt System.</p>
         <p>For support, contact your shop or visit our help center.</p>
     </div>
 </body>

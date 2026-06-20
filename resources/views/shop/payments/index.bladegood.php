@@ -506,7 +506,7 @@ function printTable() {
                 </div>
                 ${printContent}
                 <div class="mt-3 text-center">
-                    <small class="text-muted">This report was generated automatically by M-right Digital Receipt System</small>
+                    <small class="text-muted">This report was generated automatically by Phone Anti-Theft Digital Receipt System</small>
                 </div>
             </body>
         </html>
