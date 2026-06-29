@@ -924,19 +924,42 @@
 
     <!-- Additional Options -->
     <div class="row">
+        @if(auth()->user()->isAgent())
+        {{-- Agent: mandatory shop details section --}}
+        <div class="col-12 mb-3">
+            <div class="alert alert-warning py-2 mb-2 small">
+                <i class="fas fa-info-circle me-1"></i>
+                <strong>Agent Mode:</strong> You must enter the details of the shop where this phone was purchased. These will appear on the receipt.
+            </div>
+            <label for="notes" class="form-label fw-medium">
+                Shop Details Where Phone Was Purchased <span class="text-danger">*</span>
+            </label>
+            <textarea class="form-control @error('notes') is-invalid @enderror"
+                      id="notes"
+                      name="notes"
+                      rows="4"
+                      required
+                      placeholder="Shop Name: &#10;Shop Address: &#10;Shop Phone: &#10;Market/Area: ">{{ old('notes') }}</textarea>
+            <small class="text-muted">Enter the shop name, address, phone number and market location as shown on the hard copy receipt.</small>
+            @error('notes')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        @else
         <div class="col-12 mb-3">
             <label for="notes" class="form-label fw-medium">
                 Receipt Notes <small class="text-muted">(Optional)</small>
             </label>
-            <textarea class="form-control @error('notes') is-invalid @enderror" 
-                      id="notes" 
-                      name="notes" 
-                      rows="3" 
+            <textarea class="form-control @error('notes') is-invalid @enderror"
+                      id="notes"
+                      name="notes"
+                      rows="3"
                       placeholder="Any additional information about this sale">{{ old('notes') }}</textarea>
             @error('notes')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
+        @endif
     </div>
 
 <!--    <div class="d-flex justify-content-between">-->

@@ -62,7 +62,8 @@ Route::prefix('receipt-portal')->name('receipt.portal.')->group(function () {
     Route::get('/login', [ReceiptPortalController::class, 'showLogin'])->name('login');
     Route::post('/login', [ReceiptPortalController::class, 'login'])->name('login.post');
     Route::get('/dashboard', [ReceiptPortalController::class, 'dashboard'])->name('dashboard');
-    Route::post('/declare-missing', [ReceiptPortalController::class, 'declareMissing'])->name('declare-missing');
+    Route::post('/missing/payment', [ReceiptPortalController::class, 'initiateMissingPayment'])->name('missing.payment');
+    Route::get('/missing/payment/callback', [ReceiptPortalController::class, 'missingPaymentCallback'])->name('missing.payment.callback');
     Route::post('/reverse-missing', [ReceiptPortalController::class, 'reverseMissing'])->name('reverse-missing');
     Route::get('/download-pdf', [ReceiptPortalController::class, 'downloadPdf'])->name('download-pdf');
     Route::post('/logout', [ReceiptPortalController::class, 'logout'])->name('logout');

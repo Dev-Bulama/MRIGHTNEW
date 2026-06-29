@@ -53,7 +53,7 @@ $request->validate([
         Rule::unique('users', 'secondary_phone')->whereNull('deleted_at'),
         Rule::unique('users', 'phone_number')->whereNull('deleted_at')
     ],
-    'user_type' => ['required', 'in:customer,shop_owner'],
+    'user_type' => ['required', 'in:customer,shop_owner,agent'],
     'password' => ['required', 'confirmed', Rules\Password::defaults()],
     'terms' => ['required', 'accepted'],
 ], [

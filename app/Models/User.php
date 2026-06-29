@@ -77,6 +77,7 @@ class User extends Authenticatable
      */
     const TYPE_ADMIN = 'admin';
     const TYPE_SHOP_OWNER = 'shop_owner';
+    const TYPE_AGENT = 'agent';
     const TYPE_CUSTOMER = 'customer';
     const TYPE_UNION = 'union'; // NEW UNION TYPE
 
@@ -102,6 +103,22 @@ class User extends Authenticatable
     public function isShopOwner(): bool
     {
         return $this->user_type === self::TYPE_SHOP_OWNER;
+    }
+
+    /**
+     * Check if user is agent.
+     */
+    public function isAgent(): bool
+    {
+        return $this->user_type === self::TYPE_AGENT;
+    }
+
+    /**
+     * Check if user can generate receipts (shop owner or agent).
+     */
+    public function canGenerateReceipts(): bool
+    {
+        return in_array($this->user_type, [self::TYPE_SHOP_OWNER, self::TYPE_AGENT]);
     }
 
     /**
@@ -157,11 +174,17 @@ class User extends Authenticatable
 public static function userTypes(): array
 {
     return [
-        self::TYPE_ADMIN => 'Administrator',
+        self::TYPE_ADMIN      => 'Administrator',
         self::TYPE_SHOP_OWNER => 'Shop Owner',
-        self::TYPE_CUSTOMER => 'Customer', 
-        self::TYPE_UNION => 'Union Executive',
+        self::TYPE_AGENT      => 'Agent',
+        self::TYPE_CUSTOMER   => 'Customer',
+        self::TYPE_UNION      => 'Union Executive',
     ];
+}
+
+public function getUserTypeDisplayAttribute(): string
+{
+    return self::userTypes()[$this->user_type] ?? ucfirst(str_replace('_', ' ', $this->user_type));
 }
     /**
      * Get user status display name.
@@ -959,21 +982,6 @@ public function getGravatarUrl($size = 200)
     return "https://www.gravatar.com/avatar/{$hash}?s={$size}&d=mp&r=g";
 }
 
-/**
- * Get user type display name
- */
-public function getUserTypeDisplayAttribute()
-{
-    $userTypes = [
-        'admin' => 'Administrator',
-        'shop_owner' => 'Shop Owner',
-        'union' => 'Union Executive',
-        'union_executive' => 'Union Executive',
-        'user' => 'User',
-    ];
-    
-    return $userTypes[$this->user_type] ?? ucfirst($this->user_type);
-}
 /**
  * Get the user's avatar URL (null-safe)
  */

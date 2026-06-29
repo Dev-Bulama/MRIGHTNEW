@@ -418,9 +418,37 @@
                 </a>
             </li>
 
-            @if(auth()->user()->isShopOwner())
-                <!-- Shop Owner Menu -->
-                
+            @if(auth()->user()->isShopOwner() || auth()->user()->isAgent())
+                <!-- Shop Owner / Agent Menu -->
+
+                @if(auth()->user()->isAgent())
+                    {{-- Agents have no shop, go straight to receipt generation --}}
+                    <li class="nav-item mb-1">
+                        <a class="nav-link {{ request()->routeIs('receipt.create') ? 'active' : '' }}"
+                           href="{{ route('receipt.create') }}">
+                            <i class="fas fa-plus-circle me-3"></i>
+                            <span>Generate Receipt</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-1">
+                        <a class="nav-link {{ request()->routeIs('receipt.resale') ? 'active' : '' }}"
+                           href="{{ route('receipt.resale') }}">
+                            <i class="fas fa-sync-alt me-3"></i>
+                            <span>Resale Phone</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-1">
+                        <a class="nav-link {{ request()->routeIs('receipt.index') ? 'active' : '' }}"
+                           href="{{ route('receipt.index') }}">
+                            <i class="fas fa-list me-3"></i>
+                            <span>My Receipts</span>
+                            @if(auth()->user()->receipts->count() > 0)
+                                <span class="badge bg-primary ms-auto">{{ auth()->user()->receipts->count() }}</span>
+                            @endif
+                        </a>
+                    </li>
+                @else
+                    {{-- Shop Owner flow --}}
                 @if(!auth()->user()->shop || !auth()->user()->shop->isActive())
                     <!-- Shop Setup (if not approved) -->
                     <li class="nav-item mb-1">
@@ -434,25 +462,25 @@
                 @else
                     <!-- Generate Receipt -->
                     <li class="nav-item mb-1">
-                        <a class="nav-link {{ request()->routeIs('receipt.create') ? 'active' : '' }}" 
+                        <a class="nav-link {{ request()->routeIs('receipt.create') ? 'active' : '' }}"
                            href="{{ route('receipt.create') }}">
                             <i class="fas fa-plus-circle me-3"></i>
                             <span>Generate Receipt</span>
                         </a>
                     </li>
-                    
+
                     <!-- Update as Resale -->
                     <li class="nav-item mb-1">
-                        <a class="nav-link {{ request()->routeIs('receipt.resale') ? 'active' : '' }}" 
+                        <a class="nav-link {{ request()->routeIs('receipt.resale') ? 'active' : '' }}"
                            href="{{ route('receipt.resale') }}">
                             <i class="fas fa-sync-alt me-3"></i>
                             <span>Resale phone</span>
                         </a>
                     </li>
-                    
+
                     <!-- My Receipts -->
                     <li class="nav-item mb-1">
-                        <a class="nav-link {{ request()->routeIs('receipt.index') ? 'active' : '' }}" 
+                        <a class="nav-link {{ request()->routeIs('receipt.index') ? 'active' : '' }}"
                            href="{{ route('receipt.index') }}">
                             <i class="fas fa-list me-3"></i>
                             <span>My Receipts</span>
@@ -474,14 +502,15 @@
                     
                     <!-- Shop Management -->
                     <li class="nav-item mb-1">
-                        <a class="nav-link {{ request()->routeIs('shop.show', 'shop.edit') ? 'active' : '' }}" 
+                        <a class="nav-link {{ request()->routeIs('shop.show', 'shop.edit') ? 'active' : '' }}"
                            href="{{ route('shop.show', auth()->user()->shop) }}">
                             <i class="fas fa-store me-3"></i>
                             <span>My Shop</span>
                         </a>
                     </li>
                 @endif
-                
+                @endif {{-- end agent/shop_owner @else --}}
+
                 <!--@if(auth()->user()->isShopOwner() && auth()->user()->shop && auth()->user()->shop->isActive())-->
                     <!-- Shop Payment Overview -->
                     <!--<li class="nav-item mb-1">-->

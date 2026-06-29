@@ -107,7 +107,10 @@
                         <i class="fas fa-triangle-exclamation"></i>
                     </div>
                     <div class="action-title">Declare Missing</div>
-                    <div class="action-desc">Report your phone as missing or stolen. Future searchers will immediately see a Missing Alert.</div>
+                    <div class="action-desc">
+                        Report your phone as missing or stolen. Future searchers will immediately see a Missing Alert.
+                        <br><span class="badge bg-warning text-dark mt-1" style="font-size:0.75rem;">Fee: ₦{{ number_format($declareMissingFee, 0) }}</span>
+                    </div>
                     <button class="btn btn-danger btn-action" data-bs-toggle="modal" data-bs-target="#missingModal">
                         <i class="fas fa-bell"></i> Report Missing
                     </button>
@@ -188,7 +191,7 @@
         </div>
     </div>
 
-    <!-- Declare Missing Modal -->
+    <!-- Declare Missing Modal — payment-gated -->
     <div class="modal fade" id="missingModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4">
@@ -196,25 +199,23 @@
                     <h5 class="modal-title fw-bold text-danger"><i class="fas fa-triangle-exclamation me-2"></i>Report Phone Missing</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <form method="POST" action="{{ route('receipt.portal.declare-missing') }}">
+                <form method="POST" action="{{ route('receipt.portal.missing.payment') }}">
                     @csrf
                     <div class="modal-body">
-                        <p class="text-muted small mb-3">Once reported, any search for your phone's serial <strong>{{ $receipt->phone_serial_number }}</strong> will immediately show a red Missing Alert with your contact information.</p>
-                        <div class="mb-3">
-                            <label class="form-label fw-600 small">Additional Notes (optional)</label>
-                            <textarea name="missing_notes" class="form-control" rows="3" placeholder="Describe when/where the phone was lost or stolen..."></textarea>
+                        <div class="alert alert-warning py-2 small mb-3">
+                            <i class="fas fa-credit-card me-1"></i>
+                            A one-time reporting fee of <strong>₦{{ number_format($declareMissingFee, 0) }}</strong> is required. You will be redirected to Paystack to complete payment. Your phone will be marked missing <strong>only after successful payment</strong>.
                         </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="confirm_missing" id="confirmMissing" value="1" required>
-                            <label class="form-check-label small" for="confirmMissing">
-                                I confirm that my phone <strong>{{ $receipt->phone_name }}</strong> has been lost or stolen and I want to report it as missing.
-                            </label>
+                        <p class="text-muted small mb-3">Once reported, any search for serial <strong>{{ $receipt->phone_serial_number }}</strong> will immediately show a red Missing Alert with your contact info.</p>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Where/When was it lost? <small class="text-muted">(optional)</small></label>
+                            <textarea name="missing_notes" class="form-control" rows="3" placeholder="Describe when/where the phone was lost or stolen..."></textarea>
                         </div>
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-danger rounded-pill px-4">
-                            <i class="fas fa-bell me-1"></i> Report as Missing
+                            <i class="fas fa-credit-card me-1"></i> Pay ₦{{ number_format($declareMissingFee, 0) }} &amp; Report Missing
                         </button>
                     </div>
                 </form>

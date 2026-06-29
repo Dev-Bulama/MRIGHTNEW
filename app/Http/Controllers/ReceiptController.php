@@ -178,9 +178,9 @@ public function unpaidReceipts(Request $request)
 public function store(Request $request)
 {
     $user = Auth::user();
-    
-    // Validate user has approved shop
-    if (!$user->shop || !$user->shop->approved) {
+
+    // Agents don't need a shop; shop owners do
+    if ($user->isShopOwner() && (!$user->shop || !$user->shop->approved)) {
         return redirect()->route('shop.create')
             ->with('error', 'Shop must be approved to generate receipts.');
     }
@@ -202,8 +202,11 @@ public function store(Request $request)
         'enable_antitheft' => ['boolean'],
         'receipt_type' => ['required', 'in:sale,resale'],
         'parent_receipt_id' => ['nullable', 'exists:receipts,id'],
-        'notes' => ['nullable', 'string', 'max:1000'],
+        'notes' => $user->isAgent() ? ['required', 'string', 'min:10', 'max:1000'] : ['nullable', 'string', 'max:1000'],
         'payment_method' => ['required', 'in:paystack,offline'],
+    ], [
+        'notes.required' => 'You must enter the shop details where this phone was purchased.',
+        'notes.min'      => 'Please provide complete shop details (name, address, phone).',
     ]);
 
     // DUPLICATE PROTECTION: Check if phone serial is already reported missing
@@ -239,17 +242,17 @@ public function store(Request $request)
         DB::beginTransaction();
 
         // Generate receipt number
-        $receiptNumber = $this->generateReceiptNumber($user->shop);
-        
+        $receiptNumber = $this->generateReceiptNumber($user->isAgent() ? null : $user->shop);
+
         // Convert amount to words
         $amountInWords = $this->convertAmountToWords($validated['amount']);
-        
+
         // Get service fee from admin settings
         $serviceFee = config('services.app.receipt_generation_fee', 500);
 
         // Create receipt
         $receipt = $user->receipts()->create([
-            'shop_id' => $user->shop->id,
+            'shop_id' => $user->isAgent() ? null : $user->shop->id,
             'receipt_number' => $receiptNumber,
             'customer_name' => $validated['customer_name'],
             'customer_phone' => $validated['customer_phone'],
@@ -838,23 +841,21 @@ public function processResaleWithPayment(Request $request)
     /**
      * Generate unique receipt number.
      */
-    private function generateReceiptNumber(Shop $shop): string
+    private function generateReceiptNumber($shop): string
     {
-        $prefix = 'MR-' . strtoupper(substr($shop->shop_name, 0, 3));
+        $prefix = $shop
+            ? 'MR-' . strtoupper(substr($shop->shop_name, 0, 3))
+            : 'MR-AGT';
         $date = now()->format('Ymd');
-        
-        // Get last receipt number for today
-        $lastReceipt = Receipt::where('shop_id', $shop->id)
-                            ->where('receipt_number', 'like', $prefix . $date . '%')
-                            ->orderBy('receipt_number', 'desc')
-                            ->first();
 
-        if ($lastReceipt) {
-            $lastNumber = (int) substr($lastReceipt->receipt_number, -4);
-            $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
-        } else {
-            $newNumber = '0001';
-        }
+        $lastReceipt = Receipt::where('receipt_number', 'like', $prefix . $date . '%')
+            ->when($shop, fn($q) => $q->where('shop_id', $shop->id))
+            ->orderBy('receipt_number', 'desc')
+            ->first();
+
+        $newNumber = $lastReceipt
+            ? str_pad((int) substr($lastReceipt->receipt_number, -4) + 1, 4, '0', STR_PAD_LEFT)
+            : '0001';
 
         return $prefix . $date . $newNumber;
     }

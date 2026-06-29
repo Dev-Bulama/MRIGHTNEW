@@ -311,36 +311,40 @@
     </div>
     <div class="container position-relative" style="z-index:5;">
         <!-- Badge -->
-        <div class="hero-badge">
-            <i class="fas fa-shield-halved"></i> Nigeria's #1 Phone Anti-Theft Platform
-        </div>
-
         <!-- Title -->
-        <h1 class="hero-title">
-            Verify Any Phone<br>
-            <span>Before You Buy.</span>
+        <h1 class="hero-title" style="font-size:clamp(1.6rem,4.5vw,2.8rem);margin-bottom:0.6rem;">
+            Phone Anti-Theft<br>
+            <span>Digital Receipt</span>
         </h1>
-        <p class="hero-subtitle">
-            Enter the phone's IMEI or serial number to instantly check ownership, missing status, and registration history.
+
+        <p style="font-size:clamp(0.95rem,2.2vw,1.1rem);color:rgba(255,255,255,0.9);font-weight:600;line-height:1.65;max-width:560px;margin:0 auto 0.75rem;text-shadow:0 1px 3px rgba(0,0,0,0.25);">
+            Verify any phone before you buy. This is to avoid buying stolen, robbery or kidnapping implicated fairly used phones that can land you in bigger trouble.
+        </p>
+        <p style="font-size:clamp(0.85rem,2vw,0.97rem);color:rgba(255,255,255,0.75);line-height:1.7;max-width:520px;margin:0 auto 2rem;">
+            Dial <strong style="color:#F8C471;">*#06#</strong> to see the Serial Number of any phone. Use the last digits along with the seller's WhatsApp number to search the phone.
         </p>
 
         <!-- SEARCH BOX -->
         <div class="search-hero-wrap">
             <div class="search-hero-box" id="search-box">
-                <i class="fas fa-search search-hero-icon" id="search-icon"></i>
+                <i class="fas fa-mobile-screen-button search-hero-icon" id="search-icon"></i>
                 <input
                     type="text"
                     class="search-hero-input"
                     id="serial-input"
-                    placeholder="Enter IMEI or Serial Number…"
+                    placeholder="Enter Phone S/no (IMEI or Serial Number)"
                     autocomplete="off"
                     maxlength="30"
                     onkeydown="if(event.key==='Enter') doSearch()"
                 >
                 <button class="search-hero-btn" id="search-btn" onclick="doSearch()">
-                    <span id="btn-text">Verify Phone</span>
+                    <span id="btn-text">Search Phone</span>
                     <i class="fas fa-arrow-right" id="btn-icon"></i>
                 </button>
+            </div>
+            <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;text-align:center;margin-top:0.5rem;">
+                <i class="fas fa-whatsapp me-1" style="color:#25D366;"></i>
+                Seller's WhatsApp no; (or other WhatsApp no related to the seller)
             </div>
 
             <!-- Demo Quick-Fill Pills -->

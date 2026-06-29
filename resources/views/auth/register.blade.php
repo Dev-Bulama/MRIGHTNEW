@@ -144,23 +144,45 @@
 
                             <!-- User Type -->
                             <div class="mb-3">
-                                <label for="user_type" class="form-label">Account Type</label>
-                                <select class="form-select @error('user_type') is-invalid @enderror" 
-                                        id="user_type" 
-                                        name="user_type" 
-                                        required>
-                                    <option value="">Select Account Type</option>
-                                    <!-- <option value="customer" {{ old('user_type') === 'customer' ? 'selected' : '' }}>
-                                        Customer - Access receipts and purchase history
-                                    </option> -->
+                                <label for="user_type" class="form-label fw-semibold">Account Type <span class="text-danger">*</span></label>
+                                <select class="form-select @error('user_type') is-invalid @enderror"
+                                        id="user_type"
+                                        name="user_type"
+                                        required
+                                        onchange="toggleAccountTypeInfo(this.value)">
+                                    <option value="">-- Select Account Type --</option>
                                     <option value="shop_owner" {{ old('user_type') === 'shop_owner' ? 'selected' : '' }}>
-                                        Shop Owner - Generate receipts for customers
+                                        Shop Owner — I own a phone shop
+                                    </option>
+                                    <option value="agent" {{ old('user_type') === 'agent' ? 'selected' : '' }}>
+                                        Agent — I generate receipts for phones from various shops
                                     </option>
                                 </select>
                                 @error('user_type')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+
+                                <div id="info-shop_owner" class="alert alert-info mt-2 py-2 small d-none">
+                                    <strong>Shop Owner:</strong> You have your own shop. Your shop name and address will automatically appear on every receipt you generate.
+                                </div>
+                                <div id="info-agent" class="alert alert-warning mt-2 py-2 small d-none">
+                                    <strong>Agent:</strong> You are mobile and generate receipts for phones sold in different shops (market agent, internet café, etc.). You will enter the selling shop's details manually on each receipt.
+                                </div>
                             </div>
+
+                            <script>
+                            function toggleAccountTypeInfo(val) {
+                                ['shop_owner','agent'].forEach(function(t){
+                                    var el = document.getElementById('info-' + t);
+                                    if (el) el.classList.toggle('d-none', t !== val);
+                                });
+                            }
+                            // Show on page load if old() is set
+                            document.addEventListener('DOMContentLoaded', function(){
+                                var sel = document.getElementById('user_type');
+                                if (sel && sel.value) toggleAccountTypeInfo(sel.value);
+                            });
+                            </script>
 
                             <!-- Password -->
                             <div class="mb-3">
